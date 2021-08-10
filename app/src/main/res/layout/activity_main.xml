@@ -37,7 +37,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="일일 수면시간" />
+                android:text="평균 수면시간" />
+            <TextView
+                android:id="@+id/sleepAvg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="50sp" />
 
             <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/sleepchart"

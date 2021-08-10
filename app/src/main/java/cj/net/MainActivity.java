@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         }
         }
 
-    /* 수면시간 */
+    /* 수면시 */
     public void setSleepBarChart() {
         BarChart barChart = findViewById(R.id.sleepchart);
 
