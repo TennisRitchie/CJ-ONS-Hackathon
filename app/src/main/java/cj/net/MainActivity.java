@@ -1,27 +1,27 @@
 package cj.net;
+
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
-import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class MainActivity extends AppCompatActivity {
-    ArrayList<Integer> jsonList = new ArrayList<>(); // ArrayList 선언
-    ArrayList<String> labelList = new ArrayList<>(); // ArrayList 선언
     ArrayList<Monitoring> monitorings= new ArrayList<>();
     ArrayList<Daily> dailies = new ArrayList<>();
-
-    BarChart barChart;
-    TextView minuteTextview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,42 +31,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         readCSV(monitorings,dailies);
 
-
-//        BarChart chart = findViewById(R.id.barchart);
-//        ArrayList NoOfEmp = new ArrayList();
-//        NoOfEmp.add(new BarEntry(945f, 0));
-//        NoOfEmp.add(new BarEntry(1040f, 1));
-//        NoOfEmp.add(new BarEntry(1133f, 2));
-//        NoOfEmp.add(new BarEntry(1240f, 3));
-//        NoOfEmp.add(new BarEntry(1369f, 4));
-//        NoOfEmp.add(new BarEntry(1487f, 5));
-//        NoOfEmp.add(new BarEntry(1501f, 6));
-//        NoOfEmp.add(new BarEntry(1645f, 7));
-//        NoOfEmp.add(new BarEntry(1578f, 8));
-//        NoOfEmp.add(new BarEntry(1695f, 9));
-//
-//        ArrayList year = new ArrayList();
-//        year.add("2008");
-//        year.add("2009");
-//        year.add("2010");
-//        year.add("2011");
-//        year.add("2012");
-//        year.add("2013");
-//        year.add("2014");
-//        year.add("2015");
-//        year.add("2016");
-//        year.add("2017");
-//
-//        BarDataSet bardataset = new BarDataSet(NoOfEmp, "No Of Employee");
-//        chart.animateY(5000);
-//
-//        BarData data = new BarData(year, bardataset); // MPAndroidChart v3.X 오류 발생
-//        bardataset.setColors(ColorTemplate.COLORFUL_COLORS);
-//        chart.setData(data);
+        setSleepBarChart(); // 수면
+        setWeightChart(); // 체중
+        setMuscleChart(); // 근육량
+        setFatChart(); // 체지방
 
     }
+
     public void readCSV(ArrayList<Monitoring> monitorings,ArrayList<Daily> dailies){
         String line;
+
         try { // monitoring.csv
             InputStreamReader is = new InputStreamReader(getResources().openRawResource(R.raw.monitoring));
             BufferedReader br = new BufferedReader(is);
@@ -78,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         try { // daily.csv
             InputStreamReader is = new InputStreamReader(getResources().openRawResource(R.raw.daily));
             BufferedReader br = new BufferedReader(is);
@@ -90,4 +65,135 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         }
+
+    /* 수면시 */
+    public void setSleepBarChart() {
+        BarChart barChart = findViewById(R.id.sleepchart);
+
+        barChart.setDrawGridBackground(false); // 배
+        barChart.setTouchEnabled(false); // 확대못하게
+        barChart.getLegend().setEnabled(false); // Remove label
+        barChart.setDescription(""); // Remove desc
+
+        XAxis xAxis = barChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        //xAxis.setDrawGridLines(false);
+
+        ArrayList sleep = new ArrayList(); // 수면시간
+
+        for (int i = 0; i < this.dailies.size(); i++) {
+            sleep.add(new BarEntry((float)(dailies.get(i).getSleep()), i));
+            //System.out.println((int)dailies.get(i).getSleep());
+        }
+
+        ArrayList year = new ArrayList();
+
+        for (int i = 1; i <= this.dailies.size(); i++) {
+            year.add(i+"일");
+        }
+
+        BarDataSet bardataset = new BarDataSet(sleep, "일일 수면시간");
+        barChart.animateY(3000);
+
+        BarData data = new BarData(year, bardataset); // MPAndroidChart v3.X 오류 발생
+        //bardataset.setColor(ColorTemplate.getHoloBlue());
+        bardataset.setColor(R.color.Islam);
+        barChart.setData(data);
+
+
     }
+
+    /* 체중 */
+    public void setWeightChart() {
+        LineChart chart = findViewById(R.id.weightchart);
+
+        chart.setTouchEnabled(false); // 확대못하게
+        XAxis xAxis = chart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+
+        ArrayList weight = new ArrayList(); // 수면시간
+
+        for (int i = 0; i < this.dailies.size(); i++) {
+            weight.add(new Entry((float)(dailies.get(i).getWeight()), i));
+        }
+
+        ArrayList year = new ArrayList();
+
+        for (int i = 1; i <= this.dailies.size(); i++) {
+            year.add(i+"일");
+        }
+
+        LineDataSet bardataset = new LineDataSet(weight, " ");
+        chart.animateY(3000);
+
+        LineData data = new LineData(year, bardataset); // MPAndroidChart v3.X 오류 발생
+        bardataset.setColor(ColorTemplate.getHoloBlue());
+        chart.setData(data);
+    }
+
+    /* 근육량 */
+    public void setMuscleChart() {
+        LineChart chart = findViewById(R.id.musclechart);
+
+        chart.setTouchEnabled(false); // 확대못하게
+
+        XAxis xAxis = chart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        //xAxis.setDrawGridLines(false);
+
+        ArrayList muscle = new ArrayList(); // 수면시간
+
+        for (int i = 0; i < this.dailies.size(); i++) {
+            muscle.add(new Entry((float)(dailies.get(i).getMuscle()), i));
+        }
+
+        ArrayList year = new ArrayList();
+
+        for (int i = 1; i <= this.dailies.size(); i++) {
+            year.add(i+"일");
+        }
+
+        LineDataSet bardataset = new LineDataSet(muscle, " ");
+        chart.animateY(3000);
+
+        LineData data = new LineData(year, bardataset); // MPAndroidChart v3.X 오류 발생
+        bardataset.setColor(ColorTemplate.getHoloBlue());
+        chart.setData(data);
+    }
+
+    /* 체지방 */
+    public void setFatChart() {
+        LineChart chart = findViewById(R.id.fatchart);
+
+        chart.setTouchEnabled(false); // 확대못하게
+
+        XAxis xAxis = chart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        //xAxis.setDrawGridLines(false);
+
+        ArrayList fat = new ArrayList(); // 수면시간
+
+        for (int i = 0; i < this.dailies.size(); i++) {
+            fat.add(new Entry((float)dailies.get(i).getFat(), i));
+        }
+
+        ArrayList year = new ArrayList();
+
+        for (int i = 1; i <= this.dailies.size(); i++) {
+            year.add(i+"일");
+        }
+
+        LineDataSet bardataset = new LineDataSet(fat, " ");
+        chart.animateY(3000);
+
+        LineData data = new LineData(year, bardataset); // MPAndroidChart v3.X 오류 발생
+
+        data.setValueFormatter(new MyValueFormatter()); // 소수점 둘째자리
+
+        bardataset.setColor(ColorTemplate.getHoloBlue());
+        chart.setData(data);
+    }
+
+
+
+}
