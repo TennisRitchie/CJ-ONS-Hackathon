@@ -1,10 +1,12 @@
 package cj.net;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
@@ -66,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         }
         }
 
-    /* 수면시 */
+    /* 수면시간 */
     public void setSleepBarChart() {
         BarChart barChart = findViewById(R.id.sleepchart);
 
@@ -77,15 +79,29 @@ public class MainActivity extends AppCompatActivity {
 
         XAxis xAxis = barChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        //xAxis.setDrawGridLines(false);
+
+        YAxis leftAxis = barChart.getAxisLeft();
+        leftAxis.setAxisMaxValue(24);
+        leftAxis.setAxisMinValue(0);
+
+        YAxis rightAxis = barChart.getAxisRight();
+        rightAxis.setAxisMaxValue(24);
+        rightAxis.setAxisMinValue(0);
 
         ArrayList sleep = new ArrayList(); // 수면시간
 
+        float total = 0;
         for (int i = 0; i < this.dailies.size(); i++) {
-            sleep.add(new BarEntry((float)(dailies.get(i).getSleep()), i));
+            float sleepData = (float) dailies.get(i).getSleep();
+            sleep.add(new BarEntry(sleepData, i));
+            total += sleepData;
             //System.out.println((int)dailies.get(i).getSleep());
         }
 
+        total /= this.dailies.size();
+        String avg = String.format("%.1f", total);
+        TextView sleepAvg = findViewById(R.id.sleepAvg);
+        sleepAvg.setText(avg + "hr");
         ArrayList year = new ArrayList();
 
         for (int i = 1; i <= this.dailies.size(); i++) {
@@ -97,7 +113,6 @@ public class MainActivity extends AppCompatActivity {
 
         BarData data = new BarData(year, bardataset); // MPAndroidChart v3.X 오류 발생
         //bardataset.setColor(ColorTemplate.getHoloBlue());
-        bardataset.setColor(R.color.Islam);
         barChart.setData(data);
 
 
@@ -107,9 +122,14 @@ public class MainActivity extends AppCompatActivity {
     public void setWeightChart() {
         LineChart chart = findViewById(R.id.weightchart);
 
+        chart.setDrawGridBackground(false);
         chart.setTouchEnabled(false); // 확대못하게
+        chart.getLegend().setEnabled(false); // Remove label
+        chart.setDescription(""); // Remove desc
+
         XAxis xAxis = chart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setAxisMaxValue(100f);
 
         ArrayList weight = new ArrayList(); // 수면시간
 
@@ -127,6 +147,8 @@ public class MainActivity extends AppCompatActivity {
         chart.animateY(3000);
 
         LineData data = new LineData(year, bardataset); // MPAndroidChart v3.X 오류 발생
+        data.setValueFormatter(new MyValueFormatter()); // 소수점 둘째자리
+
         bardataset.setColor(ColorTemplate.getHoloBlue());
         chart.setData(data);
     }
@@ -135,7 +157,10 @@ public class MainActivity extends AppCompatActivity {
     public void setMuscleChart() {
         LineChart chart = findViewById(R.id.musclechart);
 
+        chart.setDrawGridBackground(false);
         chart.setTouchEnabled(false); // 확대못하게
+        chart.getLegend().setEnabled(false); // Remove label
+        chart.setDescription(""); // Remove desc
 
         XAxis xAxis = chart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -157,6 +182,8 @@ public class MainActivity extends AppCompatActivity {
         chart.animateY(3000);
 
         LineData data = new LineData(year, bardataset); // MPAndroidChart v3.X 오류 발생
+        data.setValueFormatter(new MyValueFormatter()); // 소수점 둘째자리
+
         bardataset.setColor(ColorTemplate.getHoloBlue());
         chart.setData(data);
     }
@@ -165,7 +192,10 @@ public class MainActivity extends AppCompatActivity {
     public void setFatChart() {
         LineChart chart = findViewById(R.id.fatchart);
 
+        chart.setDrawGridBackground(false);
         chart.setTouchEnabled(false); // 확대못하게
+        chart.getLegend().setEnabled(false); // Remove label
+        chart.setDescription(""); // Remove desc
 
         XAxis xAxis = chart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
