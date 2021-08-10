@@ -22,9 +22,31 @@
     android:orientation="vertical"
     >
 <!--위험성 도넛 chart -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:gravity ="center"
+        android:text="위험 수준" />
 
-<!--종합(심박수,자궁수축률,태동,혈당,혈압) line chart -->
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/harmnesschart"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
 
+    <!--종합(심박수,자궁수축률,태동,혈당,혈압) line chart -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:gravity ="center"
+        android:text="Monitoring" />
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/monitoringchart"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
 <!--수면시간 line chart -->
 
  <!--체성분 도넛 chart -->
