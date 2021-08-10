@@ -238,10 +238,6 @@ public class MainActivity extends AppCompatActivity {
         chart.setData(data);
     }
 
-
-
-}
-
         // harmness Pie Chart
         public void harmnessChart(ArrayList<Monitoring> monitorings){
            PieChart pieChart = findViewById(R.id.harmnesschart);
