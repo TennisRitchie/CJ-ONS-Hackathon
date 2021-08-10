@@ -16,44 +16,18 @@
         android:fillViewport="true"
         android:layout_marginTop="0dp"
         android:id="@+id/scrollView">
-        <LinearLayout
-            android:orientation="vertical"
-            android:id="@+id/harmnessLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+<!--위험성 도넛 chart -->
 
-<!--            위험성 도넛 chart -->
+<!--종합(심박수,자궁수축률,태동,혈당,혈압) line chart -->
 
+<!--수면시간 line chart -->
 
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="vertical"
-            android:id="@+id/totalLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <!--            종합(심박수,자궁수축률,태동,혈당,혈압) line chart -->
-
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="vertical"
-            android:id="@+id/sleepLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <!--            수면시간 line chart -->
-
-
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="vertical"
-            android:id="@+id/inbodyLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <!--            체성분 도넛 chart -->
-
-
-        </LinearLayout>
+ <!--체성분 도넛 chart -->
+</LinearLayout>
     </ScrollView>
 </LinearLayout>
