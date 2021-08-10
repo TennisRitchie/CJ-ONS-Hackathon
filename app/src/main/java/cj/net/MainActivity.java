@@ -9,18 +9,28 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     ArrayList<Integer> jsonList = new ArrayList<>(); // ArrayList 선언
     ArrayList<String> labelList = new ArrayList<>(); // ArrayList 선언
+    ArrayList<Monitoring> monitorings= new ArrayList<>();
+    ArrayList<Daily> dailies = new ArrayList<>();
+
     BarChart barChart;
     TextView minuteTextview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        String path = System.getProperty("user.dir");
+        System.out.println("Working Directory = " + path);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        readCSV(monitorings,dailies);
+
 
 //        BarChart chart = findViewById(R.id.barchart);
 //        ArrayList NoOfEmp = new ArrayList();
@@ -55,4 +65,29 @@ public class MainActivity extends AppCompatActivity {
 //        chart.setData(data);
 
     }
-}
+    public void readCSV(ArrayList<Monitoring> monitorings,ArrayList<Daily> dailies){
+        String line;
+        try { // monitoring.csv
+            InputStreamReader is = new InputStreamReader(getResources().openRawResource(R.raw.monitoring));
+            BufferedReader br = new BufferedReader(is);
+            String[] columns = br.readLine().split(",");
+            while ((line = br.readLine()) !=null){
+                String[] data = line.split(",");
+                monitorings.add(new Monitoring(Double.parseDouble(data[2]),Double.parseDouble(data[3]),Double.parseDouble(data[4]),Double.parseDouble(data[5]),Double.parseDouble(data[6]),Double.parseDouble(data[7])));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try { // daily.csv
+            InputStreamReader is = new InputStreamReader(getResources().openRawResource(R.raw.daily));
+            BufferedReader br = new BufferedReader(is);
+            String[] columns = br.readLine().split(",");
+            while ((line = br.readLine()) !=null){
+                String[] data = line.split(",");
+                dailies.add(new Daily(Double.parseDouble(data[1]),Double.parseDouble(data[2]),Double.parseDouble(data[3]),Double.parseDouble(data[4])));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        }
+    }
