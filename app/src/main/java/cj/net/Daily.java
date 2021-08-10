@@ -12,4 +12,21 @@ public class Daily {
         this.fat = fat;
         this.sleep = sleep;
     }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public double getMuscle() {
+        return muscle;
+    }
+
+    public double getFat() {
+        return fat;
+    }
+
+    public double getSleep() {
+        return sleep;
+    }
+
 }
