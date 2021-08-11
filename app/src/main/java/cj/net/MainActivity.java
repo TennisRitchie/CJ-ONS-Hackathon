@@ -401,8 +401,21 @@ public class MainActivity extends AppCompatActivity {
             l.setEnabled(false);
             // description hide
             pieChart.setDescription(null);
-            int[] colors = {color4, Color.rgb(250,200,200)};
-            dataSet.setColors(colors);
+            int[] redColors = {color4, Color.rgb(250,200,200)};
+            int[] orangeColors = {Color.rgb(255,180,0), Color.rgb(250,250,222)};
+            int[] greenColors = {Color.rgb(170,235,170), Color.rgb(240,255,240)};
+
+            if (0 <= variable && variable <= 30) {
+                dataSet.setColors(greenColors);
+                pieChart.setCenterTextColor(greenColors[0]);
+            } else if (30 <= variable && variable <= 60) {
+                dataSet.setColors(orangeColors);
+                pieChart.setCenterTextColor(orangeColors[0]);
+            } else if (60 <= variable && variable <= 100) {
+                dataSet.setColors(redColors);
+                pieChart.setCenterTextColor(redColors[0]);
+            }
+
             dataSet.setDrawValues(false);
             dataSet.setValueTextColor(Color.GRAY);
 
@@ -415,7 +428,7 @@ public class MainActivity extends AppCompatActivity {
             pieChart.setCenterText(String.valueOf(Math.round(variable)) + "%");
             pieChart.setCenterTextSize(35);
             pieChart.setCenterTextTypeface(tf);
-            pieChart.setCenterTextColor(Color.rgb(210,90,90));
+
             //pieChart.setCenterTextRadiusPercent();
     }
 
