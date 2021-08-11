@@ -1,12 +1,8 @@
 package cj.net;
+
 import android.graphics.Color;
-
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.util.EventLogTags;
 import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
@@ -14,7 +10,6 @@ import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
@@ -26,15 +21,10 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -43,6 +33,17 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Daily> dailies = new ArrayList<>();
     boolean[] options = new boolean[5];
 
+    int color1 = Color.rgb(183,164,238); // PURPLE
+    int color2 = Color.rgb(120,120,170); // PURPLE
+    int color3 = Color.rgb(123,104,238); // PURPLE
+    int color4 = Color.rgb(210,90,90); // PICK
+
+
+    int[] LIBERTY_COLORS = {
+            Color.rgb(207, 248, 246), Color.rgb(148, 212, 212), Color.rgb(136, 180, 187),
+            Color.rgb(118, 174, 175), Color.rgb(42, 109, 130)
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         readCSV(monitorings,dailies);
         harmnessChart(monitorings);
         monitoringChart(monitorings,options);
-        setSleepBarChart(); // 수면
+        setSleepBarChart(dailies); // 수면
         setWeightChart(); // 체중
         setMuscleChart(); // 근육량
         setFatChart(); // 체지방
@@ -85,8 +86,8 @@ public class MainActivity extends AppCompatActivity {
         }
         }
 
-    /* 수면시 */
-    public void setSleepBarChart() {
+    /* 수면시간 */
+    public void setSleepBarChart(ArrayList<Daily> dailies) {
         BarChart barChart = findViewById(R.id.sleepchart);
 
         barChart.setDrawGridBackground(false); // 배
@@ -108,28 +109,43 @@ public class MainActivity extends AppCompatActivity {
         ArrayList sleep = new ArrayList(); // 수면시간
 
         float total = 0;
-        for (int i = 0; i < this.dailies.size(); i++) {
+        for (int i = 0; i < dailies.size(); i++) {
             float sleepData = (float) dailies.get(i).getSleep();
             sleep.add(new BarEntry(sleepData, i));
             total += sleepData;
-            //System.out.println((int)dailies.get(i).getSleep());
         }
 
-        total /= this.dailies.size();
+        // 평균 수면시간
+        total /= dailies.size();
         String avg = String.format("%.1f", total);
         TextView sleepAvg = findViewById(R.id.sleepAvg);
         sleepAvg.setText(avg + "hr");
+
         ArrayList year = new ArrayList();
 
-        for (int i = 1; i <= this.dailies.size(); i++) {
+        for (int i = 1; i <= dailies.size(); i++) {
             year.add(i+"일");
         }
 
         BarDataSet bardataset = new BarDataSet(sleep, "일일 수면시간");
         barChart.animateY(3000);
 
-        BarData data = new BarData(year, bardataset); // MPAndroidChart v3.X 오류 발생
-        //bardataset.setColor(ColorTemplate.getHoloBlue());
+        BarData data = new BarData(year, bardataset); // MPAndroidChart v3.X 오류 발생정
+        data.setValueFormatter(new MyValueFormatter()); // 소수점 첫째자리
+
+        sleepAvg.setTextColor(color2);
+
+        data.setValueTextColor(color1);
+        bardataset.setColor(color1);
+        xAxis.setTextColor(color1); // x축
+        xAxis.setGridColor(color1); // x축
+        leftAxis.setTextColor(color1); // y축
+        leftAxis.setGridColor(color1);
+        rightAxis.setTextColor(color1); // y축
+        rightAxis.setGridColor(color1); // y축
+
+        xAxis.setDrawGridLines(false);
+
         barChart.setData(data);
 
 
@@ -150,9 +166,18 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList weight = new ArrayList(); // 수면시간
 
-        for (int i = 0; i < this.dailies.size(); i++) {
-            weight.add(new Entry((float)(dailies.get(i).getWeight()), i));
+        float total = 0;
+        for (int i = 0; i < dailies.size(); i++) {
+            float weightData = (float) dailies.get(i).getWeight();
+            weight.add(new BarEntry(weightData, i));
+            total += weightData;
         }
+
+        // 평균 체중
+        total /= dailies.size();
+        String avg = String.format("%.1f", total);
+        TextView weightAvg = findViewById(R.id.weightAvg);
+        weightAvg.setText(avg + "kg");
 
         ArrayList year = new ArrayList();
 
@@ -166,7 +191,24 @@ public class MainActivity extends AppCompatActivity {
         LineData data = new LineData(year, bardataset); // MPAndroidChart v3.X 오류 발생
         data.setValueFormatter(new MyValueFormatter()); // 소수점 둘째자리
 
-        bardataset.setColor(ColorTemplate.getHoloBlue());
+        weightAvg.setTextColor(color2);
+
+        data.setValueTextColor(color1);
+        bardataset.setCircleColor(color1);
+        bardataset.setColor(color1);
+        xAxis.setTextColor(color1); // x축
+        xAxis.setGridColor(color1); // x축
+
+        YAxis leftAxis = chart.getAxisLeft();
+        YAxis rightAxis = chart.getAxisRight();
+        leftAxis.setTextColor(color1); // y축
+        leftAxis.setGridColor(color1);
+        rightAxis.setTextColor(color1); // y축
+        rightAxis.setGridColor(color1); // y축
+
+        xAxis.setDrawGridLines(false);
+
+
         chart.setData(data);
     }
 
@@ -185,9 +227,19 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList muscle = new ArrayList(); // 수면시간
 
-        for (int i = 0; i < this.dailies.size(); i++) {
-            muscle.add(new Entry((float)(dailies.get(i).getMuscle()), i));
+        float total = 0;
+        for (int i = 0; i < dailies.size(); i++) {
+            float muscleData = (float) dailies.get(i).getMuscle();
+            muscle.add(new BarEntry(muscleData, i));
+            total += muscleData;
         }
+
+        // 평균 근육
+        total /= dailies.size();
+        String avg = String.format("%.1f", total);
+        TextView muscleAvg = findViewById(R.id.muscleAvg);
+        muscleAvg.setText(avg + "%");
+        muscleAvg.setTextColor(color2);
 
         ArrayList year = new ArrayList();
 
@@ -201,7 +253,24 @@ public class MainActivity extends AppCompatActivity {
         LineData data = new LineData(year, bardataset); // MPAndroidChart v3.X 오류 발생
         data.setValueFormatter(new MyValueFormatter()); // 소수점 둘째자리
 
-        bardataset.setColor(ColorTemplate.getHoloBlue());
+        muscleAvg.setTextColor(color2);
+
+        data.setValueTextColor(color1);
+        bardataset.setCircleColor(color1);
+        bardataset.setColor(color1);
+        xAxis.setTextColor(color1); // x축
+        xAxis.setGridColor(color1); // x축
+
+        YAxis leftAxis = chart.getAxisLeft();
+        YAxis rightAxis = chart.getAxisRight();
+        leftAxis.setTextColor(color1); // y축
+        leftAxis.setGridColor(color1);
+        rightAxis.setTextColor(color1); // y축
+        rightAxis.setGridColor(color1); // y축
+
+        xAxis.setDrawGridLines(false);
+
+
         chart.setData(data);
     }
 
@@ -220,9 +289,20 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList fat = new ArrayList(); // 수면시간
 
-        for (int i = 0; i < this.dailies.size(); i++) {
-            fat.add(new Entry((float)dailies.get(i).getFat(), i));
+
+        float total = 0;
+        for (int i = 0; i < dailies.size(); i++) {
+            float fatData = (float) dailies.get(i).getFat();
+            fat.add(new BarEntry(fatData, i));
+            total += fatData;
+            //System.out.println((int)dailies.get(i).getSleep());
         }
+
+        // 평균 체지방률
+        total /= dailies.size();
+        String avg = String.format("%.1f", total);
+        TextView fatAvg = findViewById(R.id.fatAvg);
+        fatAvg.setText(avg + "%");
 
         ArrayList year = new ArrayList();
 
@@ -237,7 +317,24 @@ public class MainActivity extends AppCompatActivity {
 
         data.setValueFormatter(new MyValueFormatter()); // 소수점 둘째자리
 
-        bardataset.setColor(ColorTemplate.getHoloBlue());
+        fatAvg.setTextColor(color2);
+
+        data.setValueTextColor(color1);
+        bardataset.setCircleColor(color1);
+        bardataset.setColor(color1);
+        xAxis.setTextColor(color1); // x축
+        xAxis.setGridColor(color1); // x축
+
+        YAxis leftAxis = chart.getAxisLeft();
+        YAxis rightAxis = chart.getAxisRight();
+        leftAxis.setTextColor(color1); // y축
+        leftAxis.setGridColor(color1);
+        rightAxis.setTextColor(color1); // y축
+        rightAxis.setGridColor(color1); // y축
+
+        xAxis.setDrawGridLines(false);
+
+
         chart.setData(data);
     }
 
@@ -253,7 +350,7 @@ public class MainActivity extends AppCompatActivity {
 
            PieDataSet dataSet = new PieDataSet(HarmnessData, "Number Of Employees");
            ArrayList harmness = new ArrayList();
-           harmness.add("위험 수준");
+           harmness.add("");
            harmness.add("");
 
            PieData data = new PieData(harmness, dataSet); // MPAndroidChart v3.X 오류 발생
@@ -262,11 +359,17 @@ public class MainActivity extends AppCompatActivity {
            l.setEnabled(false);
             // description hide
             pieChart.setDescription(null);
-           dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+            int[] colors = {color4, Color.rgb(250,200,200)};
+           dataSet.setColors(colors);
+           dataSet.setDrawValues(false);
+           dataSet.setValueTextColor(Color.GRAY);
+
            pieChart.animateXY(5000, 5000);
-           pieChart.setHoleRadius(75);
+           pieChart.setHoleRadius(65);
            // set center Text
            pieChart.setCenterText("위험도\n" + String.valueOf(Math.round(variable)) + "%\n");
+           pieChart.setCenterText(String.valueOf(Math.round(variable)) + "%");
+
            pieChart.setCenterTextSize(35);
            //pieChart.setCenterTextRadiusPercent();
     }
@@ -303,31 +406,31 @@ public class MainActivity extends AppCompatActivity {
             if(options[0]) {
                 LineDataSet lineDataSet1 = new LineDataSet(entry[0], columns[0]);
                 lineDataSet1.setDrawCircles(false);
-                lineDataSet1.setColor(colors[0]);
+                lineDataSet1.setColor(LIBERTY_COLORS[0]);
                 lineDataSets.add(lineDataSet1);
             }
         if(options[1]) {
             LineDataSet lineDataSet2 = new LineDataSet(entry[1], columns[1]);
             lineDataSet2.setDrawCircles(false);
-            lineDataSet2.setColor(colors[1]);
+            lineDataSet2.setColor(LIBERTY_COLORS[1]);
             lineDataSets.add(lineDataSet2);
         }
         if(options[2]) {
             LineDataSet lineDataSet3 = new LineDataSet(entry[2], columns[2]);
             lineDataSet3.setDrawCircles(false);
-            lineDataSet3.setColor(colors[2]);
+            lineDataSet3.setColor(LIBERTY_COLORS[2]);
             lineDataSets.add(lineDataSet3);
         }
         if(options[3]) {
             LineDataSet lineDataSet4 = new LineDataSet(entry[3], columns[3]);
             lineDataSet4.setDrawCircles(false);
-            lineDataSet4.setColor(colors[3]);
+            lineDataSet4.setColor(LIBERTY_COLORS[3]);
             lineDataSets.add(lineDataSet4);
         }
         if(options[4]) {
             LineDataSet lineDataSet5 = new LineDataSet(entry[4], columns[4]);
             lineDataSet5.setDrawCircles(false);
-            lineDataSet5.setColor(colors[4]);
+            lineDataSet5.setColor(LIBERTY_COLORS[4]);
             lineDataSets.add(lineDataSet5);
         }
             String[] x = new String[3194];
