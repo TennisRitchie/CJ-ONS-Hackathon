@@ -37,4 +37,5 @@ dependencies {
 
     implementation 'com.github.PhilJay:MPAndroidChart:v2.2.4'
 
+    implementation 'org.jetbrains:annotations-java5:15.0'
 }
