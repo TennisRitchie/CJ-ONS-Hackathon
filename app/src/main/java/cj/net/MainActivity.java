@@ -1,8 +1,12 @@
 package cj.net;
-
 import android.graphics.Color;
+
 import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.util.EventLogTags;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
@@ -367,9 +371,7 @@ public class MainActivity extends AppCompatActivity {
            pieChart.animateXY(5000, 5000);
            pieChart.setHoleRadius(65);
            // set center Text
-           pieChart.setCenterText("위험도\n" + String.valueOf(Math.round(variable)) + "%\n");
-           pieChart.setCenterText(String.valueOf(Math.round(variable)) + "%");
-
+           pieChart.setCenterText("\n위험도\n" + String.valueOf(Math.round(variable)) + "%\n");
            pieChart.setCenterTextSize(35);
            //pieChart.setCenterTextRadiusPercent();
     }
@@ -464,5 +466,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
         }
         monitoringChart(monitorings,options);
+        LineChart lineChart = findViewById(R.id.monitoringchart);
+        lineChart.invalidate();
     }
     }
