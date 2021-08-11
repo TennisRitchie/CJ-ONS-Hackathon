@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="#e9e9e9">
 
 
     <ScrollView
@@ -14,206 +15,264 @@
         android:orientation="vertical"
         android:gravity ="center"
         android:fillViewport="true"
-        android:layout_marginTop="0dp"
         android:id="@+id/scrollView">
+
         <LinearLayout
             android:id="@+id/Layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingTop="20dp">
-<!--위험성 도넛 chart -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:fontFamily="@font/esamanrubold"
-                android:gravity="center"
-                android:text="위험 수준"
-                android:textSize="20sp" />
-
-    <com.github.mikephil.charting.charts.PieChart
-        android:id="@+id/harmnesschart"
-        android:layout_width="match_parent"
-        android:layout_height="200dp" />
-            <!--종합(심박수,자궁수축률,태동,혈당,혈압) line chart -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:fontFamily="@font/esamanrubold"
-                android:gravity="center"
-                android:text="Monitoring"
-                android:textSize="20sp" />
+            android:orientation="vertical">
+            <!--위험성 도넛 chart -->
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-
-                <CheckBox
-                    android:id="@+id/FHR_btn"
-                    android:layout_width="75dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/esamanrumedium"
-                    android:onClick="onCheckBoxClicked"
-                    android:text="심박수" />
-
-                <CheckBox
-                    android:id="@+id/UC_btn"
-                    android:layout_width="110dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/esamanrumedium"
-                    android:onClick="onCheckBoxClicked"
-                    android:text="자궁수축률" />
-
-                <CheckBox
-                    android:id="@+id/FM_btn"
-                    android:layout_width="70dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/esamanrumedium"
-                    android:onClick="onCheckBoxClicked"
-                    android:text="태동" />
-
-                <CheckBox
-                    android:id="@+id/glucose_btn"
-                    android:layout_width="70dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/esamanrumedium"
-                    android:onClick="onCheckBoxClicked"
-                    android:text="혈당" />
-
-                <CheckBox
-                    android:id="@+id/pressure_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/esamanrumedium"
-                    android:onClick="onCheckBoxClicked"
-                    android:text="혈압" />
-            </LinearLayout>
-
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/monitoringchart"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                />
-        <!--수면시간 line chart -->
-
-        <LinearLayout
-            android:id="@+id/sleepLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingTop="20dp">
-
-            <TextView
+                android:id="@+id/danLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/esamanrubold"
-                android:gravity="center"
-                android:text="평균 수면시간"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/sleepAvg"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/esamanrubold"
-                android:gravity="center"
-                android:textSize="30sp" />
-
-            <com.github.mikephil.charting.charts.BarChart
-                android:id="@+id/sleepchart"
-                android:layout_width="350dp"
-                android:layout_height="200dp"
-                android:layout_gravity="center_horizontal" />
-
-        </LinearLayout>
-            <!--체중 chart -->
-        <LinearLayout
-            android:id="@+id/weightLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingTop="20dp">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="평균 체중" />
-            <TextView
-                android:id="@+id/weightAvg"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/esamanrubold"
-                android:gravity="center"
-                android:text="일일 체중"
-                android:textSize="20sp" />
-
-                android:textSize="30sp" />
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/weightchart"
-                android:layout_width="350dp"
-                android:layout_height="200dp"
-                android:layout_gravity="center_horizontal" />
-        </LinearLayout>
-            <!--근육 chart -->
-        <LinearLayout
-            android:id="@+id/muscleLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingTop="20dp">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="평균 근육량" />
-            <TextView
-                android:id="@+id/muscleAvg"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/esamanrubold"
-                android:gravity="center"
-                android:textSize="30sp" />
-                android:text="일일 근육량"
-                android:textSize="20sp" />
-
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/musclechart"
-                android:layout_width="350dp"
-                android:layout_height="200dp"
-                android:layout_gravity="center_horizontal" />
-        </LinearLayout>
-
-            <!--체지방 chart -->
-            <LinearLayout
-                android:id="@+id/fatLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/layout_background"
                 android:orientation="vertical"
                 android:paddingTop="20dp">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/esamanrumedium"
                     android:gravity="center"
-                    android:text="평균 체지방률" />
+                    android:text="위험도"
+                    android:textSize="20sp" />
 
-            <TextView
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/harmnesschart"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginBottom="20dp" />
+            </LinearLayout>
+            <!--종합(심박수,자궁수축률,태동,혈당,혈압) line chart -->
+
+            <LinearLayout
+                android:id="@+id/monitoringLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/esamanrubold"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/layout_background"
+                android:orientation="vertical"
+                android:paddingTop="20dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/esamanrumedium"
+                    android:gravity="center"
+                    android:text="Monitoring"
+                    android:textSize="20sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+
+                    <CheckBox
+                        android:id="@+id/FHR_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/esamanrumedium"
+                        android:onClick="onCheckBoxClicked"
+                        android:text="심박수" />
+
+                    <CheckBox
+                        android:id="@+id/UC_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/esamanrumedium"
+                        android:onClick="onCheckBoxClicked"
+                        android:text="자궁수축률" />
+
+                    <CheckBox
+                        android:id="@+id/FM_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/esamanrumedium"
+                        android:onClick="onCheckBoxClicked"
+                        android:text="태동" />
+
+                    <CheckBox
+                        android:id="@+id/glucose_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/esamanrumedium"
+                        android:onClick="onCheckBoxClicked"
+                        android:text="혈당" />
+
+                    <CheckBox
+                        android:id="@+id/pressure_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/esamanrumedium"
+                        android:onClick="onCheckBoxClicked"
+                        android:text="혈압" />
+                </LinearLayout>
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/monitoringchart"
+                    android:layout_width="350dp"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="10dp" />
+            </LinearLayout>
+            <!--수면시간 line chart -->
+
+            <LinearLayout
+                android:id="@+id/sleepLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/layout_background"
                 android:gravity="center"
-                android:text="일일 체지방률"
-                android:textSize="20sp" />
+                android:orientation="vertical"
+                android:paddingTop="20dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/esamanrumedium"
+                    android:gravity="center"
+                    android:text="평균 수면시간"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/sleepAvg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/esamanrumedium"
+                    android:gravity="center"
+                    android:textSize="30sp" />
+
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/sleepchart"
+                    android:layout_width="350dp"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="20dp" />
+
+            </LinearLayout>
+            <!--체중 chart -->
+            <LinearLayout
+                android:id="@+id/weightLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/layout_background"
+                android:orientation="vertical"
+                android:paddingTop="20dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/esamanrumedium"
+                    android:gravity="center"
+                    android:text="평균 체중"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/weightAvg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/esamanrumedium"
+                    android:gravity="center"
+                    android:textSize="30sp" />
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/weightchart"
+                    android:layout_width="350dp"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="20dp" />
+            </LinearLayout>
+            <!--근육 chart -->
+            <LinearLayout
+                android:id="@+id/muscleLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/layout_background"
+                android:orientation="vertical"
+                android:paddingTop="20dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/esamanrumedium"
+                    android:gravity="center"
+                    android:text="평균 근육량"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/muscleAvg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/esamanrumedium"
+                    android:gravity="center"
+                    android:textSize="30sp" />
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/musclechart"
+                    android:layout_width="350dp"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="20dp" />
+            </LinearLayout>
+
+            <!--체지방 chart -->
+            <LinearLayout
+                android:id="@+id/fatLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/layout_background"
+                android:orientation="vertical"
+                android:paddingTop="20dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/esamanrumedium"
+                    android:gravity="center"
+                    android:text="평균 체지방률"
+                    android:textSize="20sp" />
+
                 <TextView
                     android:id="@+id/fatAvg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/esamanrumedium"
                     android:gravity="center"
                     android:textSize="30sp" />
 
@@ -221,9 +280,10 @@
                     android:id="@+id/fatchart"
                     android:layout_width="350dp"
                     android:layout_height="200dp"
-                    android:layout_gravity="center_horizontal" />
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="20dp" />
             </LinearLayout>
 
-</LinearLayout>
+        </LinearLayout>
     </ScrollView>
 </LinearLayout>
