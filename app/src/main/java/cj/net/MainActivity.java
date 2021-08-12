@@ -28,12 +28,15 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
     ArrayList<Monitoring> monitorings= new ArrayList<>();
     ArrayList<Daily> dailies = new ArrayList<>();
     boolean[] options = new boolean[5];
+    float harmness;
+
 
     int color1 = Color.rgb(183,164,238); // PURPLE
     int color2 = Color.rgb(120,120,170); // PURPLE
@@ -46,7 +49,15 @@ public class MainActivity extends AppCompatActivity {
             Color.rgb(75, 154, 160), Color.rgb(42, 109, 130),  Color.rgb(22, 109, 160)
     };
 
+
+    int[] VORDIPLOM_COLORS = {
+            Color.rgb(207, 248, 246), Color.rgb(142, 249, 183), Color.rgb(173, 139, 240), Color.rgb(255, 160, 40),
+            Color.rgb(140, 234, 255), Color.rgb(255, 140, 157)
+    };
+
     Typeface tf;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +71,13 @@ public class MainActivity extends AppCompatActivity {
             options[4] = true;
             readCSV(monitorings, dailies);
         }
+
+        harmness = (float)monitorings.get(monitorings.size()-1).getHarmness();
+
+        if (harmness >= 70) {
+            showAlert();
+        }
+
         harmnessChart(monitorings);
         monitoringChart(monitorings,options);
         setSleepBarChart(dailies); // 수면
@@ -444,15 +462,15 @@ public class MainActivity extends AppCompatActivity {
             String[] columns = {"심박수", "자궁수축율", "태동", "혈당", "혈압"};
 
             CheckBox fhr = findViewById(R.id.FHR_btn);
-            fhr.setTextColor(LIBERTY_COLORS[1]);
+            fhr.setTextColor(VORDIPLOM_COLORS[1]);
             CheckBox uc = findViewById(R.id.UC_btn);
-            uc.setTextColor(LIBERTY_COLORS[2]);
+            uc.setTextColor(VORDIPLOM_COLORS[2]);
             CheckBox fm = findViewById(R.id.FM_btn);
-            fm.setTextColor(LIBERTY_COLORS[3]);
+            fm.setTextColor(VORDIPLOM_COLORS[3]);
             CheckBox glu = findViewById(R.id.glucose_btn);
-            glu.setTextColor(LIBERTY_COLORS[4]);
+            glu.setTextColor(VORDIPLOM_COLORS[4]);
             CheckBox press = findViewById(R.id.pressure_btn);
-            press.setTextColor(LIBERTY_COLORS[5]);
+            press.setTextColor(VORDIPLOM_COLORS[5]);
 
             int[] colors = {Color.BLUE, Color.RED, Color.MAGENTA, Color.YELLOW, Color.GREEN};
             int index = 0;
@@ -482,31 +500,31 @@ public class MainActivity extends AppCompatActivity {
             if(options[0]) {
                 LineDataSet lineDataSet1 = new LineDataSet(entry[0], columns[0]);
                 lineDataSet1.setDrawCircles(false);
-                lineDataSet1.setColor(LIBERTY_COLORS[1]);
+                lineDataSet1.setColor(VORDIPLOM_COLORS[1]);
                 lineDataSets.add(lineDataSet1);
             }
         if(options[1]) {
             LineDataSet lineDataSet2 = new LineDataSet(entry[1], columns[1]);
             lineDataSet2.setDrawCircles(false);
-            lineDataSet2.setColor(LIBERTY_COLORS[2]);
+            lineDataSet2.setColor(VORDIPLOM_COLORS[2]);
             lineDataSets.add(lineDataSet2);
         }
         if(options[2]) {
             LineDataSet lineDataSet3 = new LineDataSet(entry[2], columns[2]);
             lineDataSet3.setDrawCircles(false);
-            lineDataSet3.setColor(LIBERTY_COLORS[3]);
+            lineDataSet3.setColor(VORDIPLOM_COLORS[3]);
             lineDataSets.add(lineDataSet3);
         }
         if(options[3]) {
             LineDataSet lineDataSet4 = new LineDataSet(entry[3], columns[3]);
             lineDataSet4.setDrawCircles(false);
-            lineDataSet4.setColor(LIBERTY_COLORS[4]);
+            lineDataSet4.setColor(VORDIPLOM_COLORS[4]);
             lineDataSets.add(lineDataSet4);
         }
         if(options[4]) {
             LineDataSet lineDataSet5 = new LineDataSet(entry[4], columns[4]);
             lineDataSet5.setDrawCircles(false);
-            lineDataSet5.setColor(LIBERTY_COLORS[5]);
+            lineDataSet5.setColor(VORDIPLOM_COLORS[5]);
             lineDataSets.add(lineDataSet5);
         }
 
@@ -526,19 +544,21 @@ public class MainActivity extends AppCompatActivity {
         YAxis rightAxis = lineChart.getAxisRight();
 
         //data.setValueTextColor(color1);
-        xAxis.setTextColor(LIBERTY_COLORS[5]); // x축
-        xAxis.setGridColor(LIBERTY_COLORS[5]); // x축
+        int grey = Color.rgb(140,140,140);
+        xAxis.setTextColor(grey); // x축
+        xAxis.setGridColor(grey); // x축
 
-        leftAxis.setTextColor(LIBERTY_COLORS[5]); // y축
-        leftAxis.setGridColor(LIBERTY_COLORS[5]);
-        rightAxis.setTextColor(LIBERTY_COLORS[5]); // y축
-        rightAxis.setGridColor(LIBERTY_COLORS[5]); // y축
+        leftAxis.setTextColor(grey); // y축
+        leftAxis.setGridColor(grey);
+        rightAxis.setTextColor(grey); // y축
+        rightAxis.setGridColor(grey); // y축
 
         xAxis.setDrawGridLines(false);
 
         xAxis.setTypeface(tf);
         leftAxis.setTypeface(tf);
         rightAxis.setTypeface(tf);
+
 
         lineChart.getLegend().setTypeface(tf);
 
@@ -569,8 +589,30 @@ public class MainActivity extends AppCompatActivity {
         LineChart lineChart = findViewById(R.id.monitoringchart);
         lineChart.invalidate();
     }
+
+    public void showAlert()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        String pressure = "140 mmHg";
+        String glucose = "155 mg/dl";
+        String msg = "※주의※\n\n" +"혈압 수치가 " + pressure +"인 상태로 정상 범위보다 30만큼 높습니다.\n\n" +
+                "혈당 수치가 " + glucose + "인 상태로 저번 주보다 20만큼 증가했습니다.\n\n" +
+                "즉시 병원을 방문해주세요.";
+        builder.setMessage(msg);
+
+        AlertDialog alertDialog = builder.create();
+
+        alertDialog.show();
+
+        TextView textView = (TextView) alertDialog.findViewById(android.R.id.message);
+        textView.setTypeface(tf);
+    }
+
     public void moveAnalysis(View view){
         Intent intent = new Intent(this,Analysis.class);
         startActivity(intent);
         }
     }
+
+
