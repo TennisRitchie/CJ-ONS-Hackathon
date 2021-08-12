@@ -10,4 +10,10 @@
                 android:gravity="top" />
     </item>
 
+    <!-- 스플래시 로고 이미지 -->
+    <item android:bottom="100dp">
+        <bitmap android:src="@drawable/logo_title"
+            android:gravity="top" />
+    </item>
+
 </layer-list>
