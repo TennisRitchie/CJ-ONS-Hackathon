@@ -7,6 +7,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.BarChart;
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Monitoring> monitorings= new ArrayList<>();
     ArrayList<Daily> dailies = new ArrayList<>();
     boolean[] options = new boolean[5];
-    float harmness;
+    float harmness = 12f;
 
 
     int color1 = Color.rgb(183,164,238); // PURPLE
@@ -73,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
             readCSV(monitorings, dailies);
         }
 
-        harmness = (float)monitorings.get(monitorings.size()-1).getHarmness();
+        //harmness = (float)monitorings.get(monitorings.size()-1).getHarmness();
 
         if (harmness >= 70) {
             showAlert();
@@ -631,6 +632,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
         }
     public void changeMode(View view){
+        ScrollView scrollView = (ScrollView) findViewById(R.id.scrollView);
+        scrollView.requestFocus(View.FOCUS_UP);
+        scrollView.scrollTo(0,0);
+
         harmness = harmness < 50 ? 74 : 12;
         View v = findViewById(R.id.analysis);
         harmnessChart(monitorings);
