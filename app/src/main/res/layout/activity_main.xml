@@ -41,11 +41,10 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
 
-                    android:gravity="center"
-                    android:text="위험도"
-                    android:textSize="20sp"
                     android:fontFamily="@font/esamanrumedium"
-                    />
+                    android:gravity="center"
+                    android:text="임신중독증 위험도"
+                    android:textSize="20sp" />
 
                 <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/harmnesschart"
@@ -113,6 +112,7 @@
                         android:id="@+id/glucose_btn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:checked="true"
                         android:fontFamily="@font/esamanrumedium"
                         android:onClick="onCheckBoxClicked"
                         android:text="혈당" />
@@ -121,6 +121,7 @@
                         android:id="@+id/pressure_btn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:checked="true"
                         android:fontFamily="@font/esamanrumedium"
                         android:onClick="onCheckBoxClicked"
                         android:text="혈압" />
