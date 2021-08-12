@@ -1,5 +1,6 @@
 package cj.net;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -596,16 +597,33 @@ public class MainActivity extends AppCompatActivity {
         String pressure = "140 mmHg";
         String glucose = "155 mg/dl";
         String msg = "※주의※\n\n" +"혈압 수치가 " + pressure +"인 상태로 정상 범위보다 30만큼 높습니다.\n\n" +
-                "혈당 수치가 " + glucose + "인 상태로 저번 주보다 20만큼 증가했습니다.\n\n" +
+                "혈당 수치가 " + glucose + "인 상태로 지난 주보다 20만큼 증가했습니다.\n\n" +
                 "즉시 병원을 방문해주세요.";
         builder.setMessage(msg);
 
-        AlertDialog alertDialog = builder.create();
+        builder.setNegativeButton("닫기",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                }
+        );
+
+        final AlertDialog alertDialog = builder.create();
+
+        //setup to change color of the button
+        alertDialog.setOnShowListener( new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface arg0) {
+                alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(color1);
+                alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTypeface(tf);
+            }
+        });
 
         alertDialog.show();
 
-        TextView textView = (TextView) alertDialog.findViewById(android.R.id.message);
-        textView.setTypeface(tf);
+        TextView message = alertDialog.findViewById(android.R.id.message);
+        message.setTypeface(tf);
     }
 
     public void moveAnalysis(View view){
@@ -616,6 +634,10 @@ public class MainActivity extends AppCompatActivity {
         harmness = harmness < 50 ? 74 : 12;
         View v = findViewById(R.id.analysis);
         harmnessChart(monitorings);
+
+        if (harmness >= 70) {
+            showAlert();
+        }
         v.invalidate();
     }
 }
