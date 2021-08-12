@@ -40,11 +40,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
-                    android:fontFamily="@font/esamanrumedium"
+
                     android:gravity="center"
                     android:text="위험도"
                     android:textSize="20sp"
-
+                    android:fontFamily="@font/esamanrumedium"
                     />
 
                 <com.github.mikephil.charting.charts.PieChart
