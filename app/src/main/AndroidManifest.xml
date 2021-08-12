@@ -9,7 +9,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Analysis" />
+            android:name=".Analysis"
+            android:parentActivityName = ".MainActivity" />
         <activity
             android:name=".MainActivity">
             <intent-filter>

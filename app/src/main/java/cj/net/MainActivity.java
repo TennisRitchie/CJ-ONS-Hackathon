@@ -566,7 +566,6 @@ public class MainActivity extends AppCompatActivity {
     }
     public void moveAnalysis(View view){
         Intent intent = new Intent(this,Analysis.class);
-        intent.putExtra("harmness",(float)monitorings.get(monitorings.size()-1).getHarmness());
         startActivity(intent);
-    }
+        }
     }
