@@ -22,24 +22,42 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:fontFamily="@font/esamanrumedium"
                     android:gravity="center"
                     android:text="혈압이 30mg/dl 증가했어요!\n30분간 휴식 후 재측정 해보세요."
-                    android:textSize="20sp" />
+                    android:textSize="25sp" />
             </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="80dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/heart"/>
+
+            <TextView
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/esamanrumedium"
+                android:gravity="left|center_vertical"
+                android:text="심작 박동수"
+                android:textSize="14sp" />
+
             <com.warkiz.widget.IndicatorStayLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
                 <com.warkiz.widget.IndicatorSeekBar
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     app:isb_progress="66"
                     app:isb_show_indicator="rectangle"
                     app:isb_show_tick_marks_type="divider"
@@ -51,5 +69,125 @@
                     app:isb_ticks_count="7" />
             </com.warkiz.widget.IndicatorStayLayout>
         </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/heart"/>
 
+        <TextView
+            android:layout_width="75dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:fontFamily="@font/esamanrumedium"
+            android:gravity="left|center_vertical"
+            android:text="자궁 수축"
+            android:textSize="14sp" />
+
+        <com.warkiz.widget.IndicatorStayLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.warkiz.widget.IndicatorSeekBar
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:isb_progress="66"
+                app:isb_show_indicator="rectangle"
+                app:isb_show_tick_marks_type="divider"
+                app:isb_show_tick_texts="true"
+                app:isb_tick_marks_color="@color/color_blue"
+                app:isb_tick_marks_ends_hide="true"
+                app:isb_tick_texts_array="@array/small_normal_middle_large_length_7"
+                app:isb_tick_texts_color="@color/color_blue"
+                app:isb_ticks_count="7" />
+        </com.warkiz.widget.IndicatorStayLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/heart"/>
+
+        <TextView
+            android:layout_width="75dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:fontFamily="@font/esamanrumedium"
+            android:gravity="left|center_vertical"
+            android:text="혈당"
+            android:textSize="14sp" />
+
+        <com.warkiz.widget.IndicatorStayLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.warkiz.widget.IndicatorSeekBar
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:isb_progress="66"
+                app:isb_show_indicator="rectangle"
+                app:isb_show_tick_marks_type="divider"
+                app:isb_show_tick_texts="true"
+                app:isb_tick_marks_color="@color/color_blue"
+                app:isb_tick_marks_ends_hide="true"
+                app:isb_tick_texts_array="@array/small_normal_middle_large_length_7"
+                app:isb_tick_texts_color="@color/color_blue"
+                app:isb_ticks_count="7" />
+        </com.warkiz.widget.IndicatorStayLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/heart"/>
+
+        <TextView
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/esamanrumedium"
+            android:gravity="left|center_vertical"
+            android:text="혈압"
+            android:textAlignment="gravity"
+            android:textSize="14sp" />
+
+        <com.warkiz.widget.IndicatorStayLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.warkiz.widget.IndicatorSeekBar
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:isb_progress="66"
+                app:isb_show_indicator="rectangle"
+                app:isb_show_tick_marks_type="divider"
+                app:isb_show_tick_texts="true"
+                app:isb_tick_marks_color="@color/color_blue"
+                app:isb_tick_marks_ends_hide="true"
+                app:isb_tick_texts_array="@array/small_normal_middle_large_length_7"
+                app:isb_tick_texts_color="@color/color_blue"
+                app:isb_ticks_count="7" />
+        </com.warkiz.widget.IndicatorStayLayout>
+        </LinearLayout>
 </LinearLayout>
