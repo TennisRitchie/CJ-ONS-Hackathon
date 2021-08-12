@@ -9,7 +9,7 @@
     tools:context=".Analysis">
 
     <LinearLayout
-        android:id="@+id/danLayout"
+        android:id="@+id/ldanLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/esamanrumedium"
             android:gravity="center"
-            android:text="혈압이 210mmHg로써 정상 범위보다 47mmHg만큼 높습니다.\n혈당이 120md/dl로써 저번 주보다 37md/dl만큼 증가했습니다.\n즉시 병원을 방문해주세요."
+            android:text="상태가 안정적입니다.\n현재 상태를 유지해주세요."
             android:textColor="#ffffff"
             android:textSize="25sp" />
     </LinearLayout>
@@ -57,14 +57,14 @@
             android:textSize="15sp" />
 
         <com.warkiz.widget.IndicatorStayLayout
-            android:id="@+id/FHR_bar"
+            android:id="@+id/lFHR_bar"
             android:layout_width="match_parent"
             android:layout_height="80dp">
 
             <com.warkiz.widget.IndicatorSeekBar
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/FHR"
+                android:id="@+id/lFHR"
                 app:isb_progress="81"
                 app:isb_show_indicator="rounded_rectangle"
                 app:isb_show_tick_marks_type="divider"
@@ -107,7 +107,7 @@
             android:textSize="15sp" />
 
         <com.warkiz.widget.IndicatorStayLayout
-            android:id="@+id/UC_bar"
+            android:id="@+id/lUC_bar"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -115,7 +115,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:isb_progress="0.005"
-                android:id="@+id/UC"
+                android:id="@+id/lUC"
                 app:isb_show_indicator="rounded_rectangle"
                 app:isb_show_tick_marks_type="divider"
                 app:isb_show_tick_texts="true"
@@ -157,7 +157,7 @@
             android:textSize="15sp" />
 
         <com.warkiz.widget.IndicatorStayLayout
-            android:id="@+id/glucose_bar"
+            android:id="@+id/lglucose_bar"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -165,7 +165,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:isb_progress="110"
-                android:id="@+id/glucose"
+                android:id="@+id/lglucose"
                 app:isb_show_indicator="rounded_rectangle"
                 app:isb_show_tick_marks_type="divider"
                 app:isb_show_tick_texts="true"
@@ -208,7 +208,7 @@
             android:textSize="15sp" />
 
         <com.warkiz.widget.IndicatorStayLayout
-            android:id="@+id/pressure_bar"
+            android:id="@+id/lpressure_bar"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -216,8 +216,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:isb_indicator_color="#9c8ccd"
-                app:isb_progress="212"
-                android:id="@+id/pressure"
+                app:isb_progress="96"
+                android:id="@+id/lpressure"
                 app:isb_show_indicator="rounded_rectangle"
                 app:isb_show_tick_marks_type="divider"
                 app:isb_show_tick_texts="true"
@@ -226,7 +226,7 @@
                 app:isb_tick_texts_array="@array/small_normal_middle_large_length_7"
                 app:isb_tick_texts_color="#9c8ccd"
                 app:isb_ticks_count="7"
-                app:isb_max="220"/>
+                app:isb_max="380"/>
         </com.warkiz.widget.IndicatorStayLayout>
     </LinearLayout>
 </LinearLayout>

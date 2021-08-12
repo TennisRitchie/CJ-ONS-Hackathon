@@ -411,16 +411,15 @@ public class MainActivity extends AppCompatActivity {
 
             //float variable = (float)monitorings.get(monitorings.size()-1).getHarmness();
 
-            float variable = 48f;
-            HarmnessData.add(new Entry(variable,0));
-            HarmnessData.add(new Entry(100f - variable,1));
+            HarmnessData.add(new Entry(harmness,0));
+            HarmnessData.add(new Entry(100f - harmness,1));
 
             PieDataSet dataSet = new PieDataSet(HarmnessData, "Number Of Employees");
-            ArrayList harmness = new ArrayList();
-            harmness.add("");
-            harmness.add("");
+            ArrayList harmnessArr = new ArrayList();
+            harmnessArr.add("");
+            harmnessArr.add("");
 
-            PieData data = new PieData(harmness, dataSet); // MPAndroidChart v3.X 오류 발생
+            PieData data = new PieData(harmnessArr, dataSet); // MPAndroidChart v3.X 오류 발생
             pieChart.setData(data);
             Legend l = pieChart.getLegend();
             l.setEnabled(false);
@@ -430,13 +429,13 @@ public class MainActivity extends AppCompatActivity {
             int[] orangeColors = {Color.rgb(255,180,0), Color.rgb(250,250,222)};
             int[] greenColors = {Color.rgb(170,235,170), Color.rgb(240,255,240)};
 
-            if (0 <= variable && variable <= 30) {
+            if (0 <= harmness && harmness <= 30) {
                 dataSet.setColors(greenColors);
                 pieChart.setCenterTextColor(greenColors[0]);
-            } else if (30 <= variable && variable <= 60) {
+            } else if (30 <= harmness && harmness <= 60) {
                 dataSet.setColors(orangeColors);
                 pieChart.setCenterTextColor(orangeColors[0]);
-            } else if (60 <= variable && variable <= 100) {
+            } else if (60 <= harmness && harmness <= 100) {
                 dataSet.setColors(redColors);
                 pieChart.setCenterTextColor(redColors[0]);
             }
@@ -450,7 +449,7 @@ public class MainActivity extends AppCompatActivity {
 
             Typeface tf = Typeface.createFromAsset(getAssets(), "esamanrulight.ttf");
             //pieChart.setClickable(false);
-            pieChart.setCenterText(String.valueOf(Math.round(variable)) + " %");
+            pieChart.setCenterText(String.valueOf(Math.round(harmness)) + " %");
             pieChart.setCenterTextSize(35);
             pieChart.setCenterTextTypeface(tf);
             //pieChart.setCenterTextRadiusPercent();
@@ -610,9 +609,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void moveAnalysis(View view){
-        Intent intent = new Intent(this,Analysis.class);
+        Intent intent = new Intent(this,harmness > 50 ?Analysis.class : Analysis2.class);
         startActivity(intent);
         }
+    public void changeMode(View view){
+        harmness = harmness < 50 ? 74 : 12;
+        View v = findViewById(R.id.analysis);
+        harmnessChart(monitorings);
+        v.invalidate();
     }
+}
 
 
