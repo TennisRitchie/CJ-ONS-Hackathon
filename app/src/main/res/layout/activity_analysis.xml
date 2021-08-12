@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/esamanrumedium"
             android:gravity="center"
-            android:text="혈압이 30mg/dl 증가했어요!\n30분간 휴식 후 재측정 해보세요."
+            android:text="혈당이 30mg/dl 증가했어요!\n30분간 휴식 후 재측정 해보세요."
             android:textColor="#ffffff"
             android:textSize="25sp" />
     </LinearLayout>
@@ -52,7 +52,7 @@
             android:layout_gravity="center"
             android:fontFamily="@font/esamanrumedium"
             android:gravity="right"
-            android:text="심작 박동수"
+            android:text="심장 박동수"
             android:textColor="#e6749d"
             android:textSize="15sp" />
 
@@ -64,6 +64,7 @@
             <com.warkiz.widget.IndicatorSeekBar
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:id="@+id/FHR"
                 app:isb_progress="81"
                 app:isb_show_indicator="rounded_rectangle"
                 app:isb_show_tick_marks_type="divider"
@@ -101,6 +102,7 @@
             android:fontFamily="@font/esamanrumedium"
             android:gravity="center"
             android:text="자궁 수축"
+
             android:textColor="#e6749d"
             android:textSize="15sp" />
 
@@ -113,9 +115,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:isb_progress="0.005"
+                android:id="@+id/UC"
                 app:isb_show_indicator="rounded_rectangle"
                 app:isb_show_tick_marks_type="divider"
                 app:isb_show_tick_texts="true"
+                app:isb_progress_value_float="true"
                 app:isb_tick_marks_color="#9c8ccd"
                 app:isb_tick_marks_ends_hide="true"
                 app:isb_tick_texts_array="@array/small_normal_middle_large_length_7"
@@ -161,6 +165,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:isb_progress="110"
+                android:id="@+id/glucose"
                 app:isb_show_indicator="rounded_rectangle"
                 app:isb_show_tick_marks_type="divider"
                 app:isb_show_tick_texts="true"
@@ -212,6 +217,7 @@
                 android:layout_height="match_parent"
                 app:isb_indicator_color="#9c8ccd"
                 app:isb_progress="152"
+                android:id="@+id/pressure"
                 app:isb_show_indicator="rounded_rectangle"
                 app:isb_show_tick_marks_type="divider"
                 app:isb_show_tick_texts="true"

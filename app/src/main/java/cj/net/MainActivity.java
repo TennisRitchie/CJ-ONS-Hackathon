@@ -55,9 +55,11 @@ public class MainActivity extends AppCompatActivity {
 
         tf = Typeface.createFromAsset(getAssets(), "esamanrulight.ttf");
 
-        if(monitorings.isEmpty())
-            readCSV(monitorings,dailies);
-
+        if(monitorings.isEmpty()) {
+            options[3] = true;
+            options[4] = true;
+            readCSV(monitorings, dailies);
+        }
         harmnessChart(monitorings);
         monitoringChart(monitorings,options);
         setSleepBarChart(dailies); // 수면
@@ -429,8 +431,8 @@ public class MainActivity extends AppCompatActivity {
             // set center Text
 
             Typeface tf = Typeface.createFromAsset(getAssets(), "esamanrulight.ttf");
-
-            pieChart.setCenterText(String.valueOf(Math.round(variable)) + "%");
+            //pieChart.setClickable(false);
+            pieChart.setCenterText(String.valueOf(Math.round(variable)) + " %");
             pieChart.setCenterTextSize(35);
             pieChart.setCenterTextTypeface(tf);
             //pieChart.setCenterTextRadiusPercent();
