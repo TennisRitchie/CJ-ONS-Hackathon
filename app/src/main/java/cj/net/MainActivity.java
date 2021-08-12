@@ -55,7 +55,8 @@ public class MainActivity extends AppCompatActivity {
 
         tf = Typeface.createFromAsset(getAssets(), "esamanrulight.ttf");
 
-        readCSV(monitorings,dailies);
+        if(monitorings.isEmpty())
+            readCSV(monitorings,dailies);
 
         harmnessChart(monitorings);
         monitoringChart(monitorings,options);
@@ -77,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 String[] data = line.split(",");
                 monitorings.add(new Monitoring(Double.parseDouble(data[2]),Double.parseDouble(data[3]),Double.parseDouble(data[4]),Double.parseDouble(data[5]),Double.parseDouble(data[6]),Double.parseDouble(data[7])));
             }
+            br.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -89,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
                 String[] data = line.split(",");
                 dailies.add(new Daily(Double.parseDouble(data[1]),Double.parseDouble(data[2]),Double.parseDouble(data[3]),Double.parseDouble(data[4])));
             }
+            br.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -429,7 +432,6 @@ public class MainActivity extends AppCompatActivity {
             pieChart.setCenterText(String.valueOf(Math.round(variable)) + "%");
             pieChart.setCenterTextSize(35);
             pieChart.setCenterTextTypeface(tf);
-
             //pieChart.setCenterTextRadiusPercent();
     }
 

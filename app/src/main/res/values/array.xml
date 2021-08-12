@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="small_normal_middle_large_length_7">
+        <item>small</item>
+        <item></item>
+        <item>normal</item>
+        <item></item>
+        <item>middle</item>
+        <item></item>
+        <item>large</item>
+    </array>
+</resources>

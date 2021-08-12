@@ -7,7 +7,6 @@
     android:orientation="vertical"
     tools:context=".Analysis"
     android:background="#e9e9e9">
-            <!--위험성 도넛 chart -->
             <LinearLayout
                 android:id="@+id/danLayout"
                 android:layout_width="match_parent"
@@ -16,7 +15,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="5dp"
-                android:background="@drawable/layout_background"
+                android:background="#c9ff19"
                 android:orientation="vertical"
                 android:paddingTop="20dp">
 
@@ -27,17 +26,30 @@
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/esamanrumedium"
                     android:gravity="center"
-                    android:text="위험도"
+                    android:text="혈압이 30mg/dl 증가했어요!\n30분간 휴식 후 재측정 해보세요."
                     android:textSize="20sp" />
             </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="match_parent"
             >
-            <TextView
+            <com.warkiz.widget.IndicatorStayLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/esamanrumedium"
-                android:text="혈압이 30mg/dl 증가했어요!\n30분간 휴식 후 재측정 해보세요."/>
+                android:layout_height="wrap_content">
+
+                <com.warkiz.widget.IndicatorSeekBar
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:isb_progress="66"
+                    app:isb_show_indicator="rectangle"
+                    app:isb_show_tick_marks_type="divider"
+                    app:isb_show_tick_texts="true"
+                    app:isb_tick_marks_color="@color/color_blue"
+                    app:isb_tick_marks_ends_hide="true"
+                    app:isb_tick_texts_array="@array/small_normal_middle_large_length_7"
+                    app:isb_tick_texts_color="@color/color_blue"
+                    app:isb_ticks_count="7" />
+            </com.warkiz.widget.IndicatorStayLayout>
         </LinearLayout>
+
 </LinearLayout>

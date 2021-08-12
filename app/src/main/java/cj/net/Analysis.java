@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.mikephil.charting.charts.PieChart;
@@ -17,11 +18,11 @@ import com.github.mikephil.charting.data.PieDataSet;
 import java.util.ArrayList;
 
 public class Analysis extends AppCompatActivity {
-    float harmness = 0f;
-    int color4 = Color.rgb(210,90,90); // PICK
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_analysis);
+        ActionBar ab = getSupportActionBar() ;
+        ab.setTitle("상세 정보") ;
     }
 }
