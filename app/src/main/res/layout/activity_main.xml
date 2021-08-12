@@ -289,6 +289,14 @@
                     android:layout_marginBottom="20dp" />
             </LinearLayout>
 
+            <Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Change Mode"
+                android:onClick="changeMode"
+                />
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

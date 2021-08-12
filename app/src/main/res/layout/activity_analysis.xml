@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/esamanrumedium"
             android:gravity="center"
-            android:text="혈당이 30mg/dl 증가했어요!\n30분간 휴식 후 재측정 해보세요."
+            android:text="혈압이 210mmHg로써 정상 범위보다 47mmHg만큼 높습니다.\n혈당이 120md/dl로써 저번 주보다 37md/dl만큼 증가했습니다.\n즉시 병원을 방문해주세요."
             android:textColor="#ffffff"
             android:textSize="25sp" />
     </LinearLayout>
@@ -216,7 +216,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:isb_indicator_color="#9c8ccd"
-                app:isb_progress="152"
+                app:isb_progress="212"
                 android:id="@+id/pressure"
                 app:isb_show_indicator="rounded_rectangle"
                 app:isb_show_tick_marks_type="divider"
@@ -226,7 +226,7 @@
                 app:isb_tick_texts_array="@array/small_normal_middle_large_length_7"
                 app:isb_tick_texts_color="#9c8ccd"
                 app:isb_ticks_count="7"
-                app:isb_max="380"/>
+                app:isb_max="220"/>
         </com.warkiz.widget.IndicatorStayLayout>
     </LinearLayout>
 </LinearLayout>

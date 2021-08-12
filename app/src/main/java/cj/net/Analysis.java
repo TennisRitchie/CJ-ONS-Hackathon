@@ -15,7 +15,6 @@ public class Analysis extends AppCompatActivity {
         setContentView(R.layout.activity_analysis);
         ActionBar ab = getSupportActionBar() ;
         ab.setTitle("분석 리포트") ;
-        View root = findViewById(R.id.analysis);
         setUCSeekBar();
     }
     public void setUCSeekBar(){
