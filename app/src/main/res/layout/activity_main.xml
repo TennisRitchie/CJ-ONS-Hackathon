@@ -8,7 +8,6 @@
     tools:context=".MainActivity"
     android:background="#e9e9e9">
 
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -43,13 +42,15 @@
                     android:fontFamily="@font/esamanrumedium"
                     android:gravity="center"
                     android:text="위험도"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"/>
 
                 <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/harmnesschart"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                    android:layout_marginBottom="20dp" />
+                    android:layout_marginBottom="20dp"
+                    android:onClick="moveAnalysis"
+                    />
             </LinearLayout>
             <!--종합(심박수,자궁수축률,태동,혈당,혈압) line chart -->
 

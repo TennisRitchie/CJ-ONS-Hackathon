@@ -1,5 +1,6 @@
 package cj.net;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -549,5 +550,10 @@ public class MainActivity extends AppCompatActivity {
         monitoringChart(monitorings,options);
         LineChart lineChart = findViewById(R.id.monitoringchart);
         lineChart.invalidate();
+    }
+    public void moveAnalysis(View view){
+        Intent intent = new Intent(this,Analysis.class);
+        intent.putExtra("harmness",(float)monitorings.get(monitorings.size()-1).getHarmness());
+        startActivity(intent);
     }
     }
