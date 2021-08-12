@@ -389,8 +389,9 @@ public class MainActivity extends AppCompatActivity {
             PieChart pieChart = findViewById(R.id.harmnesschart);
             ArrayList HarmnessData = new ArrayList();
 
-            float variable = (float)monitorings.get(monitorings.size()-1).getHarmness();
+            //float variable = (float)monitorings.get(monitorings.size()-1).getHarmness();
 
+            float variable = 48f;
             HarmnessData.add(new Entry(variable,0));
             HarmnessData.add(new Entry(100f - variable,1));
 
@@ -423,7 +424,7 @@ public class MainActivity extends AppCompatActivity {
             dataSet.setDrawValues(false);
             dataSet.setValueTextColor(Color.GRAY);
 
-            pieChart.animateXY(5000, 5000);
+            pieChart.animateXY(1000, 1000);
             pieChart.setHoleRadius(65);
             // set center Text
 

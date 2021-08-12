@@ -1,21 +1,9 @@
 package cj.net;
 
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.PieData;
-import com.github.mikephil.charting.data.PieDataSet;
-
-import java.util.ArrayList;
 
 public class Analysis extends AppCompatActivity {
     @Override
@@ -23,6 +11,6 @@ public class Analysis extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_analysis);
         ActionBar ab = getSupportActionBar() ;
-        ab.setTitle("상세 정보") ;
+        ab.setTitle("분석 리포트") ;
     }
 }
