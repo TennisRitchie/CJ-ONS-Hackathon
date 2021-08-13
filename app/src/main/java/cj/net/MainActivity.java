@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Monitoring> monitorings= new ArrayList<>();
     ArrayList<Daily> dailies = new ArrayList<>();
     boolean[] options = new boolean[5];
-    float harmness;
+    float harmness = 12f;
 
 
     int color1 = Color.rgb(183,164,238); // PURPLE
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
             readCSV(monitorings, dailies);
         }
 
-        harmness = (float)monitorings.get(monitorings.size()-1).getHarmness();
+        //harmness = (float)monitorings.get(monitorings.size()-1).getHarmness();
 
         if (harmness >= 70) {
             showAlert();
@@ -595,8 +595,8 @@ public class MainActivity extends AppCompatActivity {
 
         String pressure = "140 mmHg";
         String glucose = "155 mg/dl";
-        String msg = "※주의※\n\n" +"혈압 수치가 " + pressure +"인 상태로 정상 범위보다 30만큼 높습니다.\n\n" +
-                "혈당 수치가 " + glucose + "인 상태로 저번 주보다 20만큼 증가했습니다.\n\n" +
+        String msg = "※주의※\n\n" +"혈압 수치가 210mmHg인 상태로 정상 범위보다 47mmHg만큼 높습니다.\n\n" +
+                "혈당 수치가 120md/dl인 상태로 지난 주보다 37md/dl만큼 증가했습니다.\n\n" +
                 "즉시 병원을 방문해주세요.";
         builder.setMessage(msg);
 

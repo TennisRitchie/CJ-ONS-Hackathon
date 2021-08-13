@@ -1,5 +1,6 @@
 package cj.net;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -39,5 +40,11 @@ public class Analysis extends AppCompatActivity {
         pressure.setIndicatorTextFormat("${PROGRESS} mmHg");
         View pressureView = pressure.getIndicator().getContentView();
         pressureView.invalidate();
+    }
+
+    public void onBackPressed(){
+        Intent intent = new Intent();
+        intent.putExtra("val",74); // 부모액티비티에게 전달할 값들을 intent에 덧붙인다
+        setResult(MainActivity.RESULT_OK, intent);
     }
 }

@@ -164,7 +164,7 @@
             <com.warkiz.widget.IndicatorSeekBar
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:isb_progress="110"
+                app:isb_progress="94"
                 android:id="@+id/lglucose"
                 app:isb_show_indicator="rounded_rectangle"
                 app:isb_show_tick_marks_type="divider"
@@ -175,7 +175,7 @@
                 app:isb_tick_texts_color="#9c8ccd"
                 app:isb_indicator_color="#9c8ccd"
                 app:isb_ticks_count="7"
-                app:isb_max="180"
+                app:isb_max="244"
                 />
         </com.warkiz.widget.IndicatorStayLayout>
     </LinearLayout>
