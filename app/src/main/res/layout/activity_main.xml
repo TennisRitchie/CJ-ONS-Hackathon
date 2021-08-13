@@ -26,15 +26,15 @@
             <LinearLayout
                 android:id="@+id/danLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginBottom="5dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/layout_background"
+                android:onClick="moveAnalysis"
                 android:orientation="vertical"
-                android:paddingTop="20dp"
-                android:onClick="moveAnalysis">
+                android:paddingTop="20dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -49,10 +49,10 @@
 
                 <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/harmnesschart"
-                    android:layout_width="match_parent"
+                    android:layout_width="200dp"
                     android:layout_height="200dp"
-                    android:layout_marginBottom="20dp"
-                    />
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="20dp" />
             </LinearLayout>
             <!--종합(심박수,자궁수축률,태동,혈당,혈압) line chart -->
 
