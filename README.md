@@ -3,7 +3,7 @@
 ## M2F : 웨어러블 기기를 활용한 임산부 질병위험 예측 서비스 
 
 ### 1. 개발 환경
-    1. 언어: Java8
+    1. 언어: Java
     2. 빌드도구: Gradle
     3. IDE: Android Studio
 
